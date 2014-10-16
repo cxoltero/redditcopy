@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       puts "dislike", to: 'links#downvote'
 
     end
+    resources 'comments'
 
   end
   root 'links#index'
