@@ -13,6 +13,7 @@ class LinksController < ApplicationController
   def show
   end
 
+
   # GET /links/new
 
   #the current_user.links.build will build from each user.
@@ -62,6 +63,22 @@ class LinksController < ApplicationController
       format.html { redirect_to links_url, notice: 'Link was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def upvote
+      @link = Link.find(params[:id])
+      @link.upvote_by current_user
+      redirect_to :back
+  end
+
+  def downvote
+      @link = Link.find(params[:id])
+      @link.downvote_by current_user
+      redirect_to :back
+  end
+
+  def score
+  self.get_upvotes.size - self.get_downvotes.size
   end
 
   private
